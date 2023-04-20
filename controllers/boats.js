@@ -49,19 +49,6 @@ exports.boats_create_post = async function(req, res) {
     }   
 }; 
  
-// Handle Boats delete form on DELETE. 
-exports.boats_delete =  async function(req, res) { 
-    console.log("delete "  + req.params.id) 
-    try { 
-        result = await Boats.findByIdAndDelete( req.params.id) 
-        console.log("Removed " + result) 
-        res.send(result) 
-    } catch (err) { 
-        res.status(500) 
-        res.send(`{"error": Error deleting ${err}}`); 
-    } 
-};  
- 
 // Handle Boats update form on PUT. 
 exports.boats_update_put = async function(req, res) { 
     console.log(`update on id ${req.params.id} with body 
@@ -122,5 +109,64 @@ exports.boats_update_put = async function(req, res) {
     res.send(`{"error": ${err}: Update for id ${req.params.id}
     failed`);
     }
-    };    
+    };
+    
+    // Handle Boats delete form on DELETE. 
+exports.boats_delete =  async function(req, res) { 
+    console.log("delete "  + req.params.id) 
+    try { 
+        result = await Boats.findByIdAndDelete( req.params.id) 
+        console.log("Removed " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": Error deleting ${err}}`); 
+    } 
+};  
+
+exports.boats_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await boats.findById( req.query.id)
+    res.render('boatsdetail',
+    { title: 'boats Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
+    exports.boats_create_Page =  function(req, res) { 
+        console.log("create view") 
+        try{ 
+            res.render('boatscreate', { title: 'boats Create'}); 
+        } 
+        catch(err){ 
+            res.status(500) 
+            res.send(`{'error': '${err}'}`); 
+        } 
+    };
+    exports.boats_update_Page =  async function(req, res) { 
+        console.log("update view for item "+req.query.id) 
+        try{ 
+            let result = await Boats.findById(req.query.id) 
+            res.render('boatsupdate', { title: 'boats Update', toShow: result }); 
+        } 
+        catch(err){ 
+            res.status(500) 
+            res.send(`{'error': '${err}'}`); 
+        } 
+    };
+    // Handle a delete one view with id from query 
+    exports.boats_delete_Page = async function(req, res) { 
+        console.log("Delete view for id "  + req.query.id) 
+        try{ 
+           result = await Boats.findById(req.query.id) 
+           res.render('boatsdelete', { title: 'boats Delete', toShow: result }); 
+        } 
+        catch(err){ 
+            res.status(500) 
+            res.send(`{'error': '${err}'}`); 
+        } 
+    };
         

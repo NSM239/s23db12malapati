@@ -3,7 +3,7 @@ const BoatsSchema = mongoose.Schema({
     BoatType: {
         type: String,
         required:true,
-        enum:['Sail powered boats','powered boats','Motorboats',],
+        enum:['Sail powered boats','powered boats','Motorboats'],
     },   
     BoatsCost: {
         type: Number,

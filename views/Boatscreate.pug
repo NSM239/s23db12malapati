@@ -1,0 +1,42 @@
+extends layout
+block content
+ h1= title
+ form(id='boatsForm', action="/resource/boats", method="POST")
+  div.form-group
+   label.boatsAttr(for='BoatType') Boat Type 
+   input#boatsType(type='text', name='BoatType')
+  div.form-group
+   label.boatsAttr(for='BoatsCost') boats Cost  
+   input#boats_model(type='text', name='BoatsCost')
+  div.form-group
+   label.boatsAttr(for='Capacity') Capacity
+   input#boats_cost(type='text', name='Capacity')
+  div.form-group 
+   label.boatsAttr(for='Hull') Hull 
+   input#Hull(type='text', name='Hull') 
+  input(type="submit")
+ script.
+  document.forms['boatsForm'].addEventListener('submit', (event) => {
+    event.preventDefault();
+    fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) 
+    }).then((resp) => {
+        return resp.json();
+    }).then((body) => {
+        alert("Save succeded")
+    }).catch((error) => {
+        alert("Save succeded "  )
+    });
+   });
+
+
+
+
+
+
+
+
+
+
+

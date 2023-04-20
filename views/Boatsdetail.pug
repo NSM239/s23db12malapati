@@ -1,0 +1,25 @@
+extends layout 
+ 
+block content 
+  h1= title 
+  if (toShow == null) 
+    h2 No instance to display
+  else
+    - let boatsid = toShow._id 
+    - let BoatType = toShow.BoatType 
+    - let BoatsCost = toShow.BoatsCost 
+    - let Capacity = toShow.Capacity 
+    - let Hull = toShow.Hull 
+    div
+      div.row
+        div(class='boatsAttr mr-3') boats ID is:
+        div #{boatsid}
+      div.row
+        div(class='boatsAttr mr-3') boats Type is:
+        div #{BoatType}
+      div.row
+        div(class='boatsAttr mr-3') boats cost is:
+        div #{BoatsCost}
+      div.row
+        div(class='boatsAttr mr-3') Capacity is:
+        div #{Capacity}

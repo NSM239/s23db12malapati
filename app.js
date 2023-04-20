@@ -69,7 +69,7 @@ instance1.save().then(doc=>{
 
 } 
  
-let reseed = true; 
+let reseed = false; 
 if (reseed) { recreateDB();}
 // error handler
 app.use(function(err, req, res, next) {
